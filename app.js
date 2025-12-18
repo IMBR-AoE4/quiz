@@ -644,51 +644,64 @@ function buildShareText(score) {
 
 async function shareResult() {
   const score = resultScore.textContent || "0";
-  const text = buildShareText(score);
   const url = window.location.href;
+  const text = buildShareText(score);
 
+  // 1) Copia sempre o texto+link (isso resolve 100% no WhatsApp)
+  try {
+    await navigator.clipboard.writeText(text);
+    copyStatus.textContent = "Texto + link copiados! Cole no WhatsApp após enviar a imagem.";
+  } catch {
+    copyStatus.textContent = "Não consegui copiar automaticamente. Use o botão COPIAR TEXTO + LINK.";
+  }
+
+  // 2) Tenta gerar a imagem do resultado
   let blob = null;
   try {
     blob = await makeResultImageBlob();
   } catch (e) {
-    // ok, cai no share sem imagem
+    blob = null;
   }
 
-  // tenta Web Share com arquivo (Android costuma suportar)
+  // 3) Tenta share nativo (imagem primeiro). Muitos WhatsApps ignoram text/url quando há file.
   if (navigator.share) {
     try {
       if (blob) {
         const file = new File([blob], "resultado.png", { type: "image/png" });
-        const shareData = { title: "AoE4 Knowledge Challenge", text, url, files: [file] };
-        // alguns browsers exigem canShare
-        if (!navigator.canShare || navigator.canShare(shareData)) {
-          await navigator.share(shareData);
-          return;
+
+        // tenta compartilhar SOMENTE o arquivo (mais compatível)
+        const shareDataFileOnly = { files: [file] };
+        if (!navigator.canShare || navigator.canShare(shareDataFileOnly)) {
+          await navigator.share(shareDataFileOnly);
+          return; // texto/link já está no clipboard
         }
       }
-      await navigator.share({ title: "AoE4 Knowledge Challenge", text, url });
+
+      // se não tiver blob ou não suportar arquivos: share só texto+link
+      await navigator.share({ title: "IMBR AoE4 QUIZZ", text, url });
       return;
+
     } catch (_) {
-      // usuário cancelou ou browser bloqueou
+      // usuário cancelou ou falhou — cai nos fallbacks abaixo
     }
   }
 
-  // fallback: mostra botões baixar/copiar
+  // 4) Fallbacks visíveis: baixar imagem e copiar texto
   if (blob) {
     btnDownloadImage.style.display = "block";
     btnDownloadImage.onclick = () => downloadBlob(blob, "resultado.png");
+  } else {
+    btnDownloadImage.style.display = "none";
   }
-  btnCopyText.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      copyStatus.textContent = "Texto + link copiados!";
-    } catch {
-      copyStatus.textContent = "Não consegui copiar automaticamente. Selecione e copie manualmente.";
-    }
-  };
 
-  copyStatus.textContent = "Seu navegador não permitiu compartilhar direto. Use BAIXAR IMAGEM ou COPIAR TEXTO + LINK.";
+  // 5) Fallback extra: abrir WhatsApp com texto (sem imagem)
+  // (WhatsApp não aceita anexar imagem via URL, então isso é só para garantir o texto)
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(waUrl, "_blank");
+
+  copyStatus.textContent = "Abrimos o WhatsApp com o texto. Se a imagem não foi junto, use BAIXAR IMAGEM e envie separadamente.";
 }
+
 
 function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
