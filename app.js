@@ -521,8 +521,10 @@ function handleAnswer(chosenCol, isTimeout) {
   // Avança
   q.answered = true;
 
-  // SFX: trombeta ao confirmar / avançar (não no timeout)
-  if (!isTimeout) playSfx("horn");
+// toca a trombeta só quando responder a última pergunta (não em timeout)
+const isLast = (currentIndex === QUIZ_SIZE - 1);
+if (!isTimeout && isLast) playSfx("horn");
+
 
   currentIndex += 1;
   updateTopProgress();
@@ -599,8 +601,16 @@ function showResult() {
 
   // badge
   const badge = pickBadge(finalScore);
-  resultBadge.src = badge.src;
-  resultTitle.textContent = badge.title;
+   resultTitle.textContent = badge.title;
+   resultBadge.style.display = "none";
+   resultBadge.removeAttribute("src");
+
+   if (badge?.src) {
+     resultBadge.src = badge.src;
+     resultBadge.style.display = "block";
+     resultBadge.onerror = () => { resultBadge.style.display = "none"; };
+   }
+
   resultScore.textContent = String(finalScore);
   resultName.textContent = playerName || "—";
 
