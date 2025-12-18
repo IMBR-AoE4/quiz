@@ -25,17 +25,17 @@ const QUOTAS = {
 // Assets genéricos (você substitui depois)
 const ASSETS = {
   sfx: {
-    wololo: "assets/sfx_wololo.mp3",
-    horn: "assets/sfx_horn.mp3",
-    victory: "assets/sfx_victory.mp3",
+    wololo: "assets/sfx_wololo.m4a",
+    horn: "assets/sfx_horn.m4a",
+    victory: "assets/sfx_victory.m4a",
   },
   badges: [
-    { min: 0,   key: "bronze",     src: "assets/badge_bronze.png",     title: "Bronze" },
-    { min: 200, key: "silver",     src: "assets/badge_silver.png",     title: "Silver" },
-    { min: 400, key: "gold",       src: "assets/badge_gold.png",       title: "Gold" },
-    { min: 600, key: "platinum",   src: "assets/badge_platinum.png",   title: "Platinum" },
-    { min: 750, key: "diamond",    src: "assets/badge_diamond.png",    title: "Diamond" },
-    { min: 900, key: "conqueror",  src: "assets/badge_conqueror.png",  title: "Conqueror" },
+    { min: 0,   key: "bronze",     src: "assets/badge_bronze.svg",     title: "Bronze" },
+    { min: 200, key: "silver",     src: "assets/badge_silver.svg",     title: "Silver" },
+    { min: 400, key: "gold",       src: "assets/badge_gold.svg",       title: "Gold" },
+    { min: 600, key: "platinum",   src: "assets/badge_platinum.svg",   title: "Platinum" },
+    { min: 750, key: "diamond",    src: "assets/badge_diamond.svg",    title: "Diamond" },
+    { min: 900, key: "conqueror",  src: "assets/badge_conqueror.svg",  title: "Conqueror" },
   ],
 };
 
