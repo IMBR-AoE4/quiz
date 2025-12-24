@@ -10,22 +10,42 @@
 </head>
 
 <body>
+  <div id="menu-container"></div>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-link">
+      <div class="logo-box">
+        <img src="imbr-logo.png" alt="Logo Clan IMBR" />
+        <div>
+          <div class="logo-text-main">IMBR</div>
+          <div class="logo-text-sub">Clan 100% Brasileiro · Age of Empires IV</div>
+        </div>
+      </div>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" data-menu-open>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
   <div id="app" class="app">
 
-    <!-- BARRA DE PROGRESSO (DISCRETA) -->
+
     <div class="top-progress-wrap" aria-hidden="true">
       <div id="topProgress" class="top-progress"></div>
     </div>
 
     <!-- LOGO PRINCIPAL (PERMANENTE) -->
-    <header class="app-header" aria-hidden="true">
+    <section class="app-header" aria-hidden="true">
       <img
         class="quiz-logo"
         src="assets/logo.png"
         alt="Logo do Quiz"
         onerror="this.style.display='none'"
       >
-    </header>
+    </section> 
 
     <!-- ================= LANDING ================= -->
     <section id="screenLanding" class="screen active">
