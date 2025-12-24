@@ -1,28 +1,17 @@
-/* AoE4 Knowledge Challenge
-   - Puxa CSV do Google Sheets
-   - Sorteio balanceado (sem mostrar nº de perguntas/áreas)
-   - Timer 30s + barra, timeout auto-avança
-   - Tempo: <=7s = 1.0; 7..25 linear até 0.2; 25..30 = 0.2; >=30 timeout
-   - Skip: joga questão pro fim mantendo tempo já gasto (elapsedCarry)
-   - Score: value * timeFactor * streakMult, normalizado para 1000
-   - Anti-chute: penaliza padrão "difícil>fácil" e erro rápido em MC
-   - Share: gera imagem do resultado via html2canvas + Web Share (fallback download/copy)
-*/
-
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8-JmKMHKyf9xImMtoN30e_8Yc3KhAeoVcfdSUeC3jkqaofIEPkz-6lCJRf1FohCbQFpKxhaevCndB/pub?output=csv";
 
-// Config do quiz
+const POINTS_MAX = 1000;
+const BASE_POINTS_PER_Q = POINTS_MAX / QUIZ_SIZE; // 41.666...
+
 const QUIZ_SIZE = 24;
 const TIME_LIMIT_MS = 30000;
 
-// Cotas (equilibrado)
 const QUOTAS = {
   difficulty: { Easy: 6, Medium: 8, Hard: 6, Elite: 4 },
   type: { MC: 18, TF: 6 },
   area: { Mechanics: 6, Units: 6, Civs: 6, Strategy: 6 },
 };
 
-// Assets genéricos (você substitui depois)
 const ASSETS = {
   sfx: {
     wololo: "assets/sfx_wololo.m4a",
@@ -41,7 +30,7 @@ const ASSETS = {
 
 const el = (id) => document.getElementById(id);
 
-// Screens
+
 const screenLanding = el("screenLanding");
 const screenName = el("screenName");
 const screenQuiz = el("screenQuiz");
@@ -72,7 +61,6 @@ const btnDownloadImage = el("btnDownloadImage");
 const btnCopyText = el("btnCopyText");
 const copyStatus = el("copyStatus");
 
-// Audio
 const audio = {
   wololo: new Audio(ASSETS.sfx.wololo),
   horn: new Audio(ASSETS.sfx.horn),
@@ -104,7 +92,6 @@ function playSfx(key) {
   } catch (_) {}
 }
 
-// Data
 let allQuestions = [];
 let quizQueue = [];         // array de questões sorteadas (com elapsedCarry etc.)
 let currentIndex = 0;
@@ -133,11 +120,9 @@ function normalizeToken(s) {
   return String(s ?? "").trim();
 }
 
-// CSV parser robusto (aspas)
 function parseCSV(text) {
   const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n").filter(l => l.trim().length > 0);
   if (!lines.length) return [];
-  // detect delimiter from header line (prefer ; if present)
   const headerLine = lines[0];
   const delim = headerLine.includes(";") ? ";" : ",";
   const rows = [];
@@ -154,7 +139,6 @@ function parseCSVLine(line, delim) {
   for (let i = 0; i < line.length; i++) {
     const ch = line[i];
     if (ch === '"') {
-      // double quotes escape
       if (inQuotes && line[i+1] === '"') {
         cur += '"';
         i++;
@@ -175,8 +159,6 @@ function parseCSVLine(line, delim) {
 }
 
 function mapRowToQuestion(row) {
-  // Esperado: A..K
-  // questid;value;type;answer;quest;res1;res2;res3;res4;area;difficulty
   const qid = normalizeToken(row[0]);
   const value = Number(String(row[1] ?? "").replace(",", ".")) || 0;
   const type = normalizeToken(row[2]).toUpperCase(); // MC / TF
@@ -213,7 +195,6 @@ function mapRowToQuestion(row) {
     options: cleanOptions,
     area,
     difficulty,
-    // runtime
     elapsedCarryMs: 0,
     answered: false,
   };
@@ -234,9 +215,7 @@ async function loadQuestions() {
   return questions;
 }
 
-// Sorteio equilibrado (area + difficulty + type).
 function buildQuizSet(all) {
-  // Normaliza rótulos exatamente como quotas
   const canon = (s) => {
     const t = String(s||"").trim();
     const map = {
@@ -254,7 +233,6 @@ function buildQuizSet(all) {
     type: q.type.toUpperCase(),
   }));
 
-  // Índices por bucket
   const byBucket = new Map();
   const keyOf = (area, diff, type) => `${area}||${diff}||${type}`;
   for (const q of pool) {
@@ -262,24 +240,18 @@ function buildQuizSet(all) {
     if (!byBucket.has(k)) byBucket.set(k, []);
     byBucket.get(k).push(q);
   }
-  // embaralha cada bucket
   for (const arr of byBucket.values()) shuffleInPlace(arr);
 
   const picked = [];
   const usedIds = new Set();
 
-  // 1) Preenche por (area x difficulty) garantindo 6 por área e quotas de dificuldade no total
-  // Estratégia: construir lista alvo por difficulty e depois distribuir por área.
   const targetByDiff = { ...QUOTAS.difficulty };
   const targetByArea = { ...QUOTAS.area };
   const targetByType = { ...QUOTAS.type };
 
-  // cria lista de “slots” com prioridade: Elite, Hard, Medium, Easy (pra não faltar os raros)
   const diffOrder = ["Elite","Hard","Medium","Easy"];
 
-  // helper: tenta pegar 1 questão que satisfaça (area,diff) preferindo type disponível
   function pickOne(area, diff) {
-    // tenta MC/TF conforme ainda precisa
     const typePref = (targetByType.MC >= targetByType.TF) ? ["MC","TF"] : ["TF","MC"];
     for (const t of typePref) {
       const k = keyOf(area, diff, t);
@@ -302,24 +274,20 @@ function buildQuizSet(all) {
         if (usedIds.has(q.id)) continue;
         usedIds.add(q.id);
         picked.push(structuredCloneQuestion(q));
-        // não ajusta targetByType aqui (vamos ajustar depois), mas isso é raro
+
         return true;
       }
     }
     return false;
   }
 
-  // Distribui: roda por difficulty (mais raro primeiro), e dentro por áreas que ainda precisam
   for (const diff of diffOrder) {
     while (targetByDiff[diff] > 0) {
-      // escolha uma área que ainda precisa
       const areasNeeding = Object.keys(targetByArea).filter(a => targetByArea[a] > 0);
       if (!areasNeeding.length) break;
-      // pega uma área aleatória entre as que precisam
       const area = areasNeeding[Math.floor(Math.random() * areasNeeding.length)];
       const ok = pickOne(area, diff);
       if (!ok) {
-        // se não deu, tenta outras áreas
         let found = false;
         for (const a of areasNeeding) {
           if (pickOne(a, diff)) { found = true; break; }
@@ -331,7 +299,6 @@ function buildQuizSet(all) {
     }
   }
 
-  // Se ainda faltou completar 24, completa com qualquer coisa não usada (preferindo manter quotas de type)
   if (picked.length < QUIZ_SIZE) {
     const remaining = pool.filter(q => !usedIds.has(q.id));
     shuffleInPlace(remaining);
@@ -374,16 +341,19 @@ function shuffleInPlace(arr) {
 }
 
 function computeMaxRaw(set) {
-  // streak perfeito: acerta todas, streakMult cresce até 1.25
+  // máximo teórico: acertar todas com timeFactor=1 e sem anti-chute
+  // se tiver streak, consideramos o máximo com streak para normalizar corretamente
   let s = 0;
   let max = 0;
-  for (const q of set) {
+
+  for (let i = 0; i < set.length; i++) {
     s += 1;
-    const streakMult = Math.min(1.25, 1 + 0.05 * s);
-    max += (q.value || 0) * 1.0 * streakMult;
+    const streakMult = Math.min(1.20, 1 + 0.03 * s); // bônus mais leve
+    max += BASE_POINTS_PER_Q * 1.0 * streakMult;
   }
   return max || 1;
 }
+
 
 // timeFactor do jeito que você pediu
 function timeFactorFromElapsed(elapsedMs) {
@@ -512,8 +482,8 @@ function handleAnswer(chosenCol, isTimeout) {
   if (correct) {
     streak += 1;
     const streakMult = Math.min(1.25, 1 + 0.05 * streak);
-    const gained = (q.value || 0) * tFactor * streakMult;
-    rawPoints += gained;
+   const gained = BASE_POINTS_PER_Q * tFactor * streakMult;
+   rawPoints += gained;
   } else {
     streak = 0;
   }
@@ -582,7 +552,6 @@ function finishQuiz() {
 }
 
 function pickBadge(score) {
-  // escolhe o maior min <= score
   let chosen = ASSETS.badges[0];
   for (const b of ASSETS.badges) {
     if (score >= b.min) chosen = b;
@@ -591,15 +560,11 @@ function pickBadge(score) {
 }
 
 function showResult() {
-  // normaliza para 1000
   let score = Math.round(1000 * (rawPoints / (maxRawPoints || 1)));
   score = clamp(score, 0, 1000);
 
-  // anti-chute
-  const { consistency, guess } = computeAntiGuessFactors();
-  const finalScore = clamp(Math.round(score * consistency * guess), 0, 1000);
+   const finalScore = score;
 
-  // badge
   const badge = pickBadge(finalScore);
    resultTitle.textContent = badge.title;
    resultBadge.style.display = "none";
@@ -620,13 +585,12 @@ function showResult() {
   showScreen(screenResult);
   playSfx("victory");
 
-  // prepara texto de share
   copyStatus.textContent = "";
-  btnDownloadImage.style.display = "none"; // aparece após gerar
+  btnDownloadImage.style.display = "none";
 }
 
 async function makeResultImageBlob() {
-  // renderiza o card do resultado como PNG
+
   const canvas = await html2canvas(resultCard, {
     backgroundColor: null,
     scale: Math.min(2, window.devicePixelRatio || 1.5),
@@ -647,7 +611,6 @@ async function shareResult() {
   const url = window.location.href;
   const text = buildShareText(score);
 
-  // 1) Copia sempre o texto+link (isso resolve 100% no WhatsApp)
   try {
     await navigator.clipboard.writeText(text);
     copyStatus.textContent = "Texto + link copiados! Cole no WhatsApp após enviar a imagem.";
@@ -655,7 +618,6 @@ async function shareResult() {
     copyStatus.textContent = "Não consegui copiar automaticamente. Use o botão COPIAR TEXTO + LINK.";
   }
 
-  // 2) Tenta gerar a imagem do resultado
   let blob = null;
   try {
     blob = await makeResultImageBlob();
@@ -663,30 +625,27 @@ async function shareResult() {
     blob = null;
   }
 
-  // 3) Tenta share nativo (imagem primeiro). Muitos WhatsApps ignoram text/url quando há file.
   if (navigator.share) {
     try {
       if (blob) {
         const file = new File([blob], "resultado.png", { type: "image/png" });
 
-        // tenta compartilhar SOMENTE o arquivo (mais compatível)
         const shareDataFileOnly = { files: [file] };
         if (!navigator.canShare || navigator.canShare(shareDataFileOnly)) {
           await navigator.share(shareDataFileOnly);
-          return; // texto/link já está no clipboard
+          return;
         }
       }
 
-      // se não tiver blob ou não suportar arquivos: share só texto+link
       await navigator.share({ title: "IMBR AoE4 QUIZZ", text, url });
       return;
 
     } catch (_) {
-      // usuário cancelou ou falhou — cai nos fallbacks abaixo
+
     }
   }
 
-  // 4) Fallbacks visíveis: baixar imagem e copiar texto
+
   if (blob) {
     btnDownloadImage.style.display = "block";
     btnDownloadImage.onclick = () => downloadBlob(blob, "resultado.png");
@@ -694,8 +653,7 @@ async function shareResult() {
     btnDownloadImage.style.display = "none";
   }
 
-  // 5) Fallback extra: abrir WhatsApp com texto (sem imagem)
-  // (WhatsApp não aceita anexar imagem via URL, então isso é só para garantir o texto)
+
   const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
   window.open(waUrl, "_blank");
 
@@ -733,17 +691,14 @@ async function startQuizFlow() {
   resetGameState();
   showScreen(screenQuiz);
 
-  // sorteia set
   quizQueue = buildQuizSet(allQuestions);
   currentIndex = 0;
   updateTopProgress();
 
-  // wololo ao entrar na primeira pergunta
   playSfx("wololo");
   renderQuestion();
 }
 
-// Events
 btnStart.addEventListener("click", async () => {
   await unlockAudio();
   showScreen(screenName);
@@ -785,15 +740,12 @@ btnShare.addEventListener("click", async () => {
 
 btnDownloadImage.addEventListener("click", async () => {
   await unlockAudio();
-  // o handler real é setado no fallback do shareResult
 });
 
 btnCopyText.addEventListener("click", async () => {
   await unlockAudio();
-  // o handler real é setado no fallback do shareResult
 });
 
-// Init
 (async function init() {
   showScreen(screenLanding);
   topProgress.style.width = "0%";
@@ -805,7 +757,6 @@ btnCopyText.addEventListener("click", async () => {
     }
   } catch (e) {
     console.error(e);
-    // deixa um aviso simples na landing
     const p = document.createElement("p");
     p.className = "subtitle";
     p.textContent = "Não consegui carregar a planilha agora. Verifique se ela está publicada e acessível.";
