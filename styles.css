@@ -1,12 +1,12 @@
 :root{
-  --bg: #070a12;
-  --ink: #eef2ff;
-  --muted: rgba(238,242,255,.72);
-  --line: rgba(238,242,255,.14);
+  --bg: #f6f9ff;              /* fundo geral claro */
+  --ink: #0b1220;             /* texto principal escuro */
+  --muted: rgba(11,18,32,.70);
+  --line: rgba(11,18,32,.14);
 
+  --accent: #1d6bff;          /* azul Age */
+  --accent2: #60a5fa;         /* azul claro */
   --gold: rgba(255,210,120,.85);
-  --accent: rgba(125,211,252,.95);
-  --accent2: rgba(167,243,208,.92);
 
   --max: 1120px;
   --radius: 18px;
@@ -34,22 +34,13 @@ img{ max-width:100%; display:block; }
 
 /* TOPBAR */
 .topbar{
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 50;
-  background: rgba(7,10,18,.62);
+  background: rgba(246,249,255,.78);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(11,18,32,.10);
 }
-
-.topbar-inner{
-  height: 68px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  width: min(var(--max), calc(100% - 44px));
-  margin: 0 auto;
+.nav-cta{
+  border: 1px solid rgba(11,18,32,.14);
+  background: rgba(255,255,255,.55);
 }
 
 .brand{
@@ -125,7 +116,7 @@ body.menu-open .mobile-menu{ display:block; }
   display:flex;
   align-items:center;
   padding: 120px 0 86px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: none;
 
   background-position:center;
   background-size: cover;
@@ -143,21 +134,23 @@ body.menu-open .mobile-menu{ display:block; }
 }
 .overlay-soft{
   background:
-    radial-gradient(1200px 650px at 25% 18%, rgba(0,0,0,.18), rgba(0,0,0,.70)),
-    linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.74));
+    radial-gradient(1200px 650px at 25% 18%, rgba(255,255,255,.35), rgba(255,255,255,.65)),
+    linear-gradient(to bottom, rgba(255,255,255,.25), rgba(255,255,255,.70));
 }
+
 .overlay-hero{
   background:
-    radial-gradient(1100px 650px at 50% 25%, rgba(0,0,0,.12), rgba(0,0,0,.72)),
-    linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,.78));
+    radial-gradient(1100px 650px at 50% 25%, rgba(255,255,255,.20), rgba(255,255,255,.75)),
+    linear-gradient(to bottom, rgba(255,255,255,.15), rgba(255,255,255,.78));
 }
+
 
 .section .wrap{ position:relative; z-index:2; }
 
 /* BACKGROUNDS */
-.bg-hero{ background-image: url("assets/background-1.png"); }
-.bg-calendar{ background-image: url("assets/background-3.png"); }
-.bg-sponsors{ background-image: url("assets/background-5.png"); }
+.bg-hero{ background-image: url("assets/background1.png"); }
+.bg-calendar{ background-image: url("assets/background3.png"); }
+.bg-sponsors{ background-image: url("assets/background5.png"); }
 
 /* seções sem imagem: gradientes sólidos */
 .bg-solid-1{
@@ -232,29 +225,13 @@ body.menu-open .mobile-menu{ display:block; }
 
 /* buttons */
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 12px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-  font-weight: 900;
-  letter-spacing: .2px;
-  transition: transform .12s ease, background .12s ease, border-color .12s ease;
-}
-.btn:hover{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.10);
-  border-color: rgba(255,255,255,.30);
+  border: 1px solid rgba(11,18,32,.14);
+  background: rgba(255,255,255,.60);
 }
 .btn-primary{
-  color: rgba(3,7,18,.92);
+  color: white;
   border-color: transparent;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
-}
-.btn-primary:hover{
-  background: linear-gradient(135deg, rgba(125,211,252,1), rgba(167,243,208,1));
 }
 .btn-ghost{}
 
@@ -290,32 +267,19 @@ body.menu-open .mobile-menu{ display:block; }
 .section-head{
   margin-bottom: 16px;
 }
-.title{
-  margin:0 0 10px 0;
-  font-size: clamp(26px, 3vw, 40px);
-  letter-spacing: -.02em;
+
+.title, .lead, .text{
+  text-shadow: 0 2px 16px rgba(0,0,0,.12);
 }
-.lead{
-  margin:0;
-  color: rgba(238,242,255,.78);
-  line-height: 1.55;
-  max-width: 920px;
-}
+
 
 .panel{
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: var(--radius);
-  background: rgba(7,10,18,.58);
-  padding: 18px;
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 
-.text{
-  margin: 0 0 12px 0;
-  color: rgba(238,242,255,.86);
-  line-height: 1.7;
-  font-size: 16px;
-}
-.text:last-child{ margin-bottom:0; }
+
 
 .pill-row{
   display:flex;
@@ -497,3 +461,4 @@ body.menu-open .mobile-menu{ display:block; }
   font-size: 13px;
 }
 .footer .dot{ opacity:.6; }
+
