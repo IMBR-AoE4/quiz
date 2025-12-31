@@ -2,331 +2,353 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LBI — Liga Brasileira Independente (AoE IV)</title>
-  <meta name="description" content="A liga independente do Age of Empires IV no Brasil. Independente. Competitiva. Brasileira." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LBI — Liga Brasileira Independente (Age of Empires IV)</title>
+
+  <meta name="description"
+    content="A liga independente do Age of Empires IV no Brasil. Independente. Competitiva. Brasileira." />
+
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#inicio" aria-label="Voltar ao início">
-        <img class="brand-logo" src="assets/logo.png" alt="LBI" />
-        <span class="brand-name">LBI</span>
-      </a>
 
-      <nav class="nav" aria-label="Navegação principal">
-        <a href="#quem-somos">Quem somos</a>
-        <a href="#calendario">Calendário</a>
-        <a href="#organizacao">Organização</a>
-        <a href="#parcerias">Parcerias</a>
-        <a class="nav-cta" href="#contato">Contato</a>
-      </nav>
+<!-- =========================
+     TOPBAR
+========================= -->
+<header class="topbar">
+  <div class="topbar-inner">
 
-      <button class="nav-toggle" type="button" aria-label="Abrir menu" onclick="document.body.classList.toggle('menu-open')">
-        <span></span><span></span><span></span>
-      </button>
+    <a class="brand" href="#inicio">
+      <img src="./assets/logo.png" alt="LBI" class="brand-logo" />
+      <span class="brand-name">LBI</span>
+    </a>
+
+    <nav class="nav">
+      <a href="#quem-somos">Quem somos</a>
+      <a href="#calendario">Calendário</a>
+      <a href="#organizacao">Organização</a>
+      <a href="#parcerias">Parcerias</a>
+      <a href="#contato" class="nav-cta">Contato</a>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Abrir menu"
+      onclick="document.body.classList.toggle('menu-open')">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+
+  <!-- mobile -->
+  <div class="mobile-menu">
+    <a href="#quem-somos" onclick="document.body.classList.remove('menu-open')">Quem somos</a>
+    <a href="#calendario" onclick="document.body.classList.remove('menu-open')">Calendário</a>
+    <a href="#organizacao" onclick="document.body.classList.remove('menu-open')">Organização</a>
+    <a href="#parcerias" onclick="document.body.classList.remove('menu-open')">Parcerias</a>
+    <a href="#contato" onclick="document.body.classList.remove('menu-open')">Contato</a>
+  </div>
+</header>
+
+<!-- =========================
+     1) HERO
+========================= -->
+<section id="inicio" class="section bg-hero">
+  <div class="overlay overlay-hero"></div>
+
+  <div class="wrap hero">
+    <div class="hero-badge">
+      <img src="./assets/logo.png" alt="Logo LBI" />
     </div>
 
-    <div class="mobile-menu">
-      <a href="#quem-somos" onclick="document.body.classList.remove('menu-open')">Quem somos</a>
-      <a href="#calendario" onclick="document.body.classList.remove('menu-open')">Calendário</a>
-      <a href="#organizacao" onclick="document.body.classList.remove('menu-open')">Organização</a>
-      <a href="#parcerias" onclick="document.body.classList.remove('menu-open')">Parcerias</a>
-      <a href="#contato" onclick="document.body.classList.remove('menu-open')">Contato</a>
+    <h1 class="hero-title">Liga Brasileira Independente</h1>
+
+    <p class="hero-subtitle">
+      A liga independente do Age of Empires IV no Brasil.<br />
+      <strong>Independente. Competitiva. Brasileira.</strong>
+    </p>
+
+    <div class="hero-actions">
+      <a href="#calendario" class="btn btn-primary">Ver calendário</a>
+      <a href="#parcerias" class="btn btn-ghost">Quero apoiar</a>
     </div>
-  </header>
 
-  <!-- 1) HERO -->
-  <section id="inicio" class="section bg-hero">
-    <div class="overlay overlay-hero"></div>
+    <div class="hero-mini">
+      <span>Eventos oficiais</span>
+      <span class="dot">•</span>
+      <span>Transmissões</span>
+      <span class="dot">•</span>
+      <span>Comunidade</span>
+    </div>
 
-    <div class="wrap hero">
-      <div class="hero-badge">
-        <img src="assets/logo.png" alt="Logo LBI" />
-      </div>
+    <div class="scroll-hint"><span></span></div>
+  </div>
+</section>
 
-      <h1 class="hero-title">Liga Brasileira Independente</h1>
+<!-- =========================
+     2) QUEM SOMOS
+========================= -->
+<section id="quem-somos" class="section bg-solid-1">
+  <div class="overlay overlay-soft"></div>
 
-      <p class="hero-subtitle">
-        A liga independente do Age of Empires IV no Brasil.<br />
-        <strong>Independente. Competitiva. Brasileira.</strong>
+  <div class="wrap content">
+    <header class="section-head">
+      <h2 class="title">Quem somos</h2>
+      <p class="lead">
+        A LBI nasce da comunidade e para a comunidade de Age of Empires IV.
+      </p>
+    </header>
+
+    <div class="panel">
+      <p class="text">
+        A LBI (Liga Brasileira Independente) nasce da comunidade e para a comunidade de Age of Empires IV.
+        Somos uma iniciativa independente criada para estruturar, organizar e fortalecer o cenário competitivo
+        brasileiro do jogo, conectando jogadores, organizadores, criadores de conteúdo e parceiros em um
+        ecossistema sólido e profissional.
       </p>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#calendario">Ver calendário</a>
-        <a class="btn btn-ghost" href="#parcerias">Quero apoiar</a>
-      </div>
+      <p class="text">
+        Nosso objetivo é oferecer campeonatos recorrentes, calendário anual, transparência organizacional
+        e um ambiente competitivo saudável, criando oportunidades reais de crescimento para atletas e
+        visibilidade para marcas que acreditam no potencial do cenário.
+      </p>
 
-      <div class="hero-mini">
-        <span>Eventos oficiais</span>
-        <span class="dot">•</span>
-        <span>Transmissões</span>
-        <span class="dot">•</span>
-        <span>Comunidade</span>
-      </div>
+      <p class="text">
+        A LBI existe para transformar a paixão pelo Age IV em competição de alto nível,
+        com identidade brasileira e visão de longo prazo.
+      </p>
 
-      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+      <div class="pill-row">
+        <span class="pill">Comunidade</span>
+        <span class="pill">Organização</span>
+        <span class="pill">Competição</span>
+        <span class="pill">Transparência</span>
+        <span class="pill">Longo prazo</span>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 2) QUEM SOMOS -->
-  <section id="quem-somos" class="section bg-solid-1">
-    <div class="overlay overlay-soft"></div>
+<!-- =========================
+     3) CALENDÁRIO
+========================= -->
+<section id="calendario" class="section bg-calendar">
+  <div class="overlay overlay-soft"></div>
 
-    <div class="wrap content">
-      <header class="section-head">
-        <h2 class="title">Quem somos</h2>
-        <p class="lead">
-          A LBI nasce da comunidade e para a comunidade de Age of Empires IV.
-        </p>
-      </header>
+  <div class="wrap content">
+    <header class="section-head">
+      <h2 class="title">Calendário anual</h2>
+      <p class="lead">
+        Cinco eventos oficiais que estruturam a temporada competitiva da LBI.
+      </p>
+    </header>
 
-      <div class="panel">
-        <p class="text">
-          A LBI (Liga Brasileira Independente) nasce da comunidade e para a comunidade de Age of Empires IV. Somos uma iniciativa independente criada para estruturar, organizar e fortalecer o cenário competitivo brasileiro do jogo, conectando jogadores, organizadores, criadores de conteúdo e parceiros em um ecossistema sólido e profissional.
-        </p>
+    <!-- IMPORTANTE: events-horizontal -->
+    <div class="events events-horizontal">
 
-        <p class="text">
-          Nosso objetivo é oferecer campeonatos recorrentes, calendário anual, transparência organizacional e um ambiente competitivo saudável, criando oportunidades reais de crescimento para atletas e visibilidade para marcas que acreditam no potencial do cenário. A LBI existe para transformar a paixão pelo Age IV em competição de alto nível, com identidade brasileira e visão de longo prazo.
-        </p>
-
-        <div class="pill-row">
-          <span class="pill">Comunidade</span>
-          <span class="pill">Organização</span>
-          <span class="pill">Competição</span>
-          <span class="pill">Visibilidade</span>
-          <span class="pill">Longo prazo</span>
+      <article class="event-row">
+        <div class="event-logo">
+          <img src="./assets/c1.png" alt="Conquistador do Brasil" />
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3) CALENDÁRIO -->
-  <section id="calendario" class="section bg-calendar">
-    <div class="overlay overlay-soft"></div>
-
-    <div class="wrap content">
-      <header class="section-head">
-        <h2 class="title">Calendário anual</h2>
-        <p class="lead">5 eventos oficiais — uma temporada completa para movimentar o competitivo BR.</p>
-      </header>
-
-      <div class="events">
-        <article class="event-row">
-          <div class="event-logo">
-            <img src="assets/c1.png" alt="Conquistador do Brasil" />
-          </div>
-          <div class="event-info">
-            <h3 class="event-name">Conquistador do Brasil</h3>
-            <p class="event-desc">
-              Copa de abertura para definir o termômetro do cenário e inaugurar a temporada com força.
-            </p>
-            <div class="event-tags">
-              <span class="tag">1×1</span>
-              <span class="tag">Abertura</span>
-              <span class="tag">Alta visibilidade</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-row">
-          <div class="event-logo">
-            <img src="assets/c2.png" alt="Torneio Brasileiro de Duplas" />
-          </div>
-          <div class="event-info">
-            <h3 class="event-name">Torneio Brasileiro de Duplas</h3>
-            <p class="event-desc">
-              Evento voltado a sinergia e estratégia em dupla, com foco em mapa pool ideal para 2×2.
-            </p>
-            <div class="event-tags">
-              <span class="tag">2×2</span>
-              <span class="tag">Estratégia</span>
-              <span class="tag">Times</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-row">
-          <div class="event-logo">
-            <img src="assets/c3.png" alt="Brasileirão do Age" />
-          </div>
-          <div class="event-info">
-            <h3 class="event-name">Brasileirão do Age</h3>
-            <p class="event-desc">
-              O torneio de consistência: narrativa de temporada e disputa intensa do início ao fim.
-            </p>
-            <div class="event-tags">
-              <span class="tag">1×1</span>
-              <span class="tag">Liga</span>
-              <span class="tag">Temporada</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-row">
-          <div class="event-logo">
-            <img src="assets/c4.png" alt="Aliança dos Impérios" />
-          </div>
-          <div class="event-info">
-            <h3 class="event-name">Aliança dos Impérios</h3>
-            <p class="event-desc">
-              O palco das equipes: coordenação, drafts e partidas épicas para a comunidade vibrar.
-            </p>
-            <div class="event-tags">
-              <span class="tag">3×3 / 4×4</span>
-              <span class="tag">Equipes</span>
-              <span class="tag">Espetáculo</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="event-row">
-          <div class="event-logo">
-            <img src="assets/c5.png" alt="LBI Master" />
-          </div>
-          <div class="event-info">
-            <h3 class="event-name">LBI Master</h3>
-            <p class="event-desc">
-              O ápice do ano: os melhores do Brasil, a maior visibilidade e a grande final da temporada.
-            </p>
-            <div class="event-tags">
-              <span class="tag">1×1</span>
-              <span class="tag">Grand Finals</span>
-              <span class="tag">Top tier</span>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="note">
-        <span class="note-strong">Dica:</span>
-        quando você fechar datas e prize pools, eu deixo essa seção com “chips” de datas, inscrição e link do Challonge em cada evento.
-      </div>
-    </div>
-  </section>
-
-  <!-- 4) ORGANIZAÇÃO / BUROCRACIA -->
-  <section id="organizacao" class="section bg-solid-2">
-    <div class="overlay overlay-soft"></div>
-
-    <div class="wrap content">
-      <header class="section-head">
-        <h2 class="title">Organização e desembaraço burocrático</h2>
-        <p class="lead">Uma liga estruturada para sustentar o competitivo com padrão e continuidade.</p>
-      </header>
-
-      <div class="panel">
-        <p class="text">
-          A LBI (Liga Brasileira Independente) surge para solucionar um dos maiores desafios do cenário competitivo de Age of Empires IV no Brasil: a falta de estrutura formal para organizar eventos, centralizar responsabilidades e viabilizar o apoio de marcas e parceiros.
-        </p>
-
-        <p class="text">
-          Atuamos como um núcleo organizador independente, responsável por planejar calendários, padronizar regulamentos, centralizar inscrições, gerenciar premiações e garantir transparência em todos os processos. Isso permite que jogadores e organizadores foquem no que realmente importa: competir, evoluir e entregar um espetáculo de alto nível para a comunidade.
-        </p>
-
-        <p class="text">
-          No aspecto institucional, a LBI facilita o desembaraço burocrático necessário para parcerias e patrocínios, oferecendo um ponto único de contato para empresas interessadas em apoiar o cenário. Dessa forma, marcas não precisam negociar com múltiplos torneios isolados, mas sim com uma liga estruturada, com planejamento anual, identidade clara e métricas de visibilidade.
-        </p>
-
-        <p class="text">
-          Para os patrocinadores, a LBI entrega continuidade, exposição e credibilidade, integrando marcas a um ecossistema que envolve campeonatos oficiais, transmissões ao vivo, produção de conteúdo, presença digital e relacionamento direto com uma comunidade engajada. Para os jogadores, isso se traduz em eventos mais frequentes, melhor organização, premiações consistentes e oportunidades reais de crescimento competitivo.
-        </p>
-
-        <p class="text">
-          A LBI não substitui a comunidade — ela organiza, potencializa e sustenta o cenário, criando as bases para um competitivo brasileiro de Age of Empires IV mais forte, profissional e duradouro.
-        </p>
-
-        <div class="metrics">
-          <div class="metric">
-            <div class="metric-big">5</div>
-            <div class="metric-label">eventos oficiais/ano</div>
-          </div>
-          <div class="metric">
-            <div class="metric-big">1</div>
-            <div class="metric-label">ponto de contato</div>
-          </div>
-          <div class="metric">
-            <div class="metric-big">BR</div>
-            <div class="metric-label">identidade & comunidade</div>
+        <div>
+          <h3 class="event-name">Conquistador do Brasil</h3>
+          <p class="event-desc">
+            Copa de abertura que define o ritmo da temporada e apresenta os principais nomes do cenário.
+          </p>
+          <div class="event-tags">
+            <span class="tag">1×1</span>
+            <span class="tag">Abertura</span>
+            <span class="tag">Open</span>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </article>
 
-  <!-- 5) PARCERIAS / PATROCINADORES -->
-  <section id="parcerias" class="section bg-sponsors">
-    <div class="overlay overlay-soft"></div>
-
-    <div class="wrap content">
-      <header class="section-head">
-        <h2 class="title">Parcerias e patrocinadores</h2>
-        <p class="lead">Exposição recorrente + comunidade engajada + calendário anual.</p>
-      </header>
-
-      <div class="panel">
-        <p class="text">
-          A LBI (Liga Brasileira Independente) convida apoiadores e patrocinadores a fazerem parte da construção do cenário competitivo brasileiro de Age of Empires IV. Nosso projeto oferece organização, calendário anual, eventos recorrentes e uma comunidade engajada, criando um ambiente sólido para exposição de marcas e parcerias de longo prazo.
-        </p>
-
-        <p class="text">
-          Apoiar a LBI é investir em um projeto estruturado, com identidade clara, alcance orgânico e crescimento contínuo. Junte sua marca a uma iniciativa que conecta competição, comunidade e profissionalismo, ajudando a fortalecer o ecossistema de esports no Brasil.
-        </p>
-
-        <p class="text"><strong>Vamos construir esse cenário juntos.</strong></p>
-
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#contato">Falar sobre parceria</a>
-          <a class="btn btn-ghost" href="#calendario">Ver eventos</a>
+      <article class="event-row">
+        <div class="event-logo">
+          <img src="./assets/c2.png" alt="Torneio Brasileiro de Duplas" />
         </div>
+        <div>
+          <h3 class="event-name">Torneio Brasileiro de Duplas</h3>
+          <p class="event-desc">
+            Evento focado em sinergia, estratégia e jogo coordenado em formato 2×2.
+          </p>
+          <div class="event-tags">
+            <span class="tag">2×2</span>
+            <span class="tag">Times</span>
+            <span class="tag">Estratégia</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="event-row">
+        <div class="event-logo">
+          <img src="./assets/c3.png" alt="Brasileirão do Age" />
+        </div>
+        <div>
+          <h3 class="event-name">Brasileirão do Age</h3>
+          <p class="event-desc">
+            Competição de longa duração que valoriza consistência e regularidade ao longo da temporada.
+          </p>
+          <div class="event-tags">
+            <span class="tag">1×1</span>
+            <span class="tag">Liga</span>
+            <span class="tag">Temporada</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="event-row">
+        <div class="event-logo">
+          <img src="./assets/c4.png" alt="Aliança dos Impérios" />
+        </div>
+        <div>
+          <h3 class="event-name">Aliança dos Impérios</h3>
+          <p class="event-desc">
+            O campeonato de equipes da LBI, com partidas épicas e alto nível de coordenação.
+          </p>
+          <div class="event-tags">
+            <span class="tag">3×3 / 4×4</span>
+            <span class="tag">Equipes</span>
+            <span class="tag">Espetáculo</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="event-row">
+        <div class="event-logo">
+          <img src="./assets/c5.png" alt="LBI Master" />
+        </div>
+        <div>
+          <h3 class="event-name">LBI Master</h3>
+          <p class="event-desc">
+            A grande final do ano, reunindo os melhores jogadores do cenário brasileiro.
+          </p>
+          <div class="event-tags">
+            <span class="tag">1×1</span>
+            <span class="tag">Finals</span>
+            <span class="tag">Elite</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     4) ORGANIZAÇÃO
+========================= -->
+<section id="organizacao" class="section bg-solid-2">
+  <div class="overlay overlay-soft"></div>
+
+  <div class="wrap content">
+    <header class="section-head">
+      <h2 class="title">Organização e estrutura</h2>
+      <p class="lead">
+        Um núcleo independente para organizar, sustentar e profissionalizar o competitivo.
+      </p>
+    </header>
+
+    <div class="panel">
+      <p class="text">
+        A LBI surge para solucionar um dos maiores desafios do cenário competitivo brasileiro:
+        a falta de estrutura formal para organizar eventos, centralizar responsabilidades
+        e viabilizar o apoio de marcas e parceiros.
+      </p>
+
+      <p class="text">
+        Atuamos como um núcleo organizador independente, responsável por planejar calendários,
+        padronizar regulamentos, centralizar inscrições, gerenciar premiações e garantir
+        transparência em todos os processos.
+      </p>
+
+      <p class="text">
+        Para jogadores, isso significa mais eventos, melhor organização e oportunidades reais
+        de crescimento competitivo. Para patrocinadores, significa continuidade,
+        exposição e credibilidade.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     5) PARCERIAS
+========================= -->
+<section id="parcerias" class="section bg-sponsors">
+  <div class="overlay overlay-soft"></div>
+
+  <div class="wrap content">
+    <header class="section-head">
+      <h2 class="title">Parcerias e patrocinadores</h2>
+      <p class="lead">
+        Apoie um projeto estruturado, com identidade clara e calendário anual.
+      </p>
+    </header>
+
+    <div class="panel">
+      <p class="text">
+        A LBI convida apoiadores e patrocinadores a fazerem parte da construção
+        do cenário competitivo brasileiro de Age of Empires IV.
+      </p>
+
+      <p class="text">
+        Apoiar a LBI é investir em um projeto organizado, com alcance orgânico,
+        crescimento contínuo e uma comunidade altamente engajada.
+      </p>
+
+      <p class="text"><strong>Vamos construir esse cenário juntos.</strong></p>
+
+      <div class="cta-row">
+        <a href="#contato" class="btn btn-primary">Falar sobre parceria</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 6) CONTATO -->
-  <section id="contato" class="section bg-solid-3">
-    <div class="overlay overlay-soft"></div>
+<!-- =========================
+     6) CONTATO
+========================= -->
+<section id="contato" class="section bg-solid-3">
+  <div class="overlay overlay-soft"></div>
 
-    <div class="wrap content">
-      <header class="section-head">
-        <h2 class="title">Contato</h2>
-        <p class="lead">Deixa aqui seus links oficiais que eu já formo o “hub” final.</p>
-      </header>
+  <div class="wrap content">
+    <header class="section-head">
+      <h2 class="title">Contato</h2>
+      <p class="lead">Canais oficiais da LBI</p>
+    </header>
 
-      <div class="contacts">
-        <a class="contact" href="#" target="_blank" rel="noreferrer">
-          <span class="contact-kicker">Discord</span>
-          <span class="contact-value">Servidor oficial</span>
-        </a>
+    <div class="contacts">
+      <a class="contact" href="#">
+        <span class="contact-kicker">Discord</span>
+        <span class="contact-value">Servidor oficial</span>
+      </a>
 
-        <a class="contact" href="#" target="_blank" rel="noreferrer">
-          <span class="contact-kicker">Instagram</span>
-          <span class="contact-value">@lbi.aoe4</span>
-        </a>
+      <a class="contact" href="#">
+        <span class="contact-kicker">Instagram</span>
+        <span class="contact-value">@lbi.aoe4</span>
+      </a>
 
-        <a class="contact" href="#" target="_blank" rel="noreferrer">
-          <span class="contact-kicker">WhatsApp</span>
-          <span class="contact-value">Falar agora</span>
-        </a>
+      <a class="contact" href="#">
+        <span class="contact-kicker">WhatsApp</span>
+        <span class="contact-value">Falar agora</span>
+      </a>
 
-        <a class="contact" href="mailto:contato@lbi.gg">
-          <span class="contact-kicker">E-mail</span>
-          <span class="contact-value">contato@lbi.gg</span>
-        </a>
-      </div>
-
-      <footer class="footer">
-        <span>© <span id="year"></span> LBI — Liga Brasileira Independente</span>
-        <span class="dot">•</span>
-        <span>Age of Empires IV</span>
-      </footer>
+      <a class="contact" href="mailto:contato@lbi.gg">
+        <span class="contact-kicker">E-mail</span>
+        <span class="contact-value">contato@lbi.gg</span>
+      </a>
     </div>
-  </section>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    <footer class="footer">
+      <span>© <span id="year"></span> LBI — Liga Brasileira Independente</span>
+      <span class="dot">•</span>
+      <span>Age of Empires IV</span>
+    </footer>
+  </div>
+</section>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
