@@ -166,9 +166,9 @@ body.menu-open .mobile-menu{ display:block; }
 .section .wrap{ position:relative; z-index:2; }
 
 /* BACKGROUNDS (imagens) */
-.bg-hero{ background-image: url("./assets/background1.png"); }
-.bg-calendar{ background-image: url("./assets/background3.png"); }
-.bg-sponsors{ background-image: url("./assets/background5.png"); }
+.bg-hero{ background-image: url("assets/background1.png"); }
+.bg-calendar{ background-image: url("assets/background3.png"); }
+.bg-sponsors{ background-image: url("assets/background5.png"); }
 
 /* seções sem imagem: gradientes claros */
 .bg-solid-1{
