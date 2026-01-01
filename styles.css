@@ -134,12 +134,21 @@ body.menu-open .mobile-menu{ display:block; }
   display:flex;
   align-items:center;
   padding: 120px 0 86px;
-  border-bottom: none;
+  overflow: hidden;
+}
 
-  background-position:center;
+.section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 @media (max-width: 900px){
@@ -175,9 +184,18 @@ body.menu-open .mobile-menu{ display:block; }
 .section .wrap{ position:relative; z-index:2; }
 
 /* BACKGROUNDS (imagens) — ✅ path mais seguro */
-.bg-hero{ background-image: url("./assets/background1.png"); }
-.bg-calendar{ background-image: url("./assets/background3.png"); }
-.bg-sponsors{ background-image: url("./assets/background5.png"); }
+.bg-hero::before{
+  background-image: url("./assets/background1.png");
+}
+
+.bg-calendar::before{
+  background-image: url("./assets/background3.png");
+}
+
+.bg-sponsors::before{
+  background-image: url("./assets/background5.png");
+}
+
 
 /* seções sem imagem: gradientes claros */
 .bg-solid-1{
