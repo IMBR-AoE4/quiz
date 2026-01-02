@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (!viewport || !track || !btnPrev || !btnNext) return;
 
-  // trava anti-duplo-init
+  // anti duplo init
   if (viewport.dataset.carouselInit === "1") return;
   viewport.dataset.carouselInit = "1";
 
@@ -15,18 +15,21 @@ window.addEventListener("DOMContentLoaded", () => {
   if (total < 2) return;
 
   let index = 0;
-  let slideWidth = 0;
+  let step = 0;
 
   function measure() {
-  slideWidth = viewport.clientWidth;
-}
+    const slide = slides[0];
+    const gap = parseInt(getComputedStyle(track).gap || 0, 10);
+    step = slide.offsetWidth + gap;
+  }
 
   function goTo(i, animate = true) {
     measure();
+
     if (!animate) track.style.transition = "none";
     else track.style.transition = "transform .35s ease";
 
-    track.style.transform = `translateX(${-i * slideWidth}px)`;
+    track.style.transform = `translateX(${-i * step}px)`;
 
     if (!animate) {
       track.offsetHeight; // reflow
@@ -35,24 +38,24 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function next() {
-    index = (index + 1) % total; // wrap
+    index = Math.min(index + 1, total - 1);
     goTo(index, true);
   }
 
   function prev() {
-    index = (index - 1 + total) % total; // wrap
+    index = Math.max(index - 1, 0);
     goTo(index, true);
   }
 
   btnNext.addEventListener("click", next);
   btnPrev.addEventListener("click", prev);
 
-  // teclado (opcional)
+  // teclado
   viewport.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
   });
-  viewport.tabIndex = 0; // permite foco pra teclado
+  viewport.tabIndex = 0;
 
   window.addEventListener("resize", () => goTo(index, false));
 
