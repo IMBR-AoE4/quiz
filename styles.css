@@ -457,44 +457,22 @@ body.menu-open .mobile-menu{ display:block; }
   padding: 6px 46px; /* espaço pras setas */
 }
 
-/* track */
-.events-carousel .events{
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 0 !important;
-  width: 100%;
-  will-change: transform;
-  transition: transform .35s ease;
-}
-
-/* slide 100% do viewport do carousel */
+/* GARANTE centralização real do card em todos os slides */
 .events-carousel .event-row{
-  flex: 0 0 100% !important;
-  width: 100% !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-
-  /* neutraliza estilos antigos */
-  border: 0 !important;
-  background: transparent !important;
-  padding: 0 !important;
-  grid-template-columns: unset !important;
 }
 
-/* card compacto (do jeito “logo-first”) */
-.events-carousel .event-card{
-  width: min(420px, 100%);
-  padding: 14px;
-  border: 1px solid rgba(11,18,32,.10);
-  border-radius: var(--radius);
-  background: rgba(255,255,255,.78);
-  text-decoration: none;
-  color: inherit;
+/* remove qualquer influência lateral invisível */
+.events-carousel .events{
+  align-items: stretch;
+}
 
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* trava o card no centro geométrico */
+.events-carousel .event-card{
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* logo contido */
