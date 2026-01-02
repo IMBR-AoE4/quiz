@@ -549,38 +549,55 @@ body.menu-open .mobile-menu{ display:block; }
 }
 .footer .dot{ opacity:.6; }
 
-/* =========================
-   CAROUSEL – CALENDÁRIO
-========================= */
+/* ======================================================
+   PATCH — CALENDÁRIO COMO CAROUSEL (1 CENTRAL, AUTOPLAY)
+   Compatível com o styles.css atual (SEM QUEBRAR NADA)
+====================================================== */
+
+/* wrapper do carousel */
 .events-carousel{
   position: relative;
-  overflow: hidden;
   width: 100%;
+  overflow: hidden; /* esconde qualquer scroll */
 }
 
-/* trilho */
-.events-carousel .events{
-  display: flex;
-  gap: 0;
-  transition: transform .6s ease;
-  will-change: transform;
-}
+/* trilho — força comportamento horizontal só aqui */
+.events-carousel .events.events-horizontal{
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0 !important;
 
-/* cada slide */
-.events-carousel .event-row{
-  flex: 0 0 100%;
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-/* centralização real */
-.events-carousel .event-row{
-  display: flex;
-  justify-content: center;
-}
-
-/* remove scrollbars de vez */
-.events-horizontal{
+  width: 100%;
   overflow: hidden !important;
+  scroll-snap-type: none !important;
+
+  will-change: transform;
+  transition: transform .6s ease;
 }
 
+/* cada slide ocupa 100% da área visível */
+.events-carousel .event-row{
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  /* neutraliza layout antigo */
+  grid-template-columns: unset !important;
+
+  /* centraliza o card */
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* garante largura elegante do card interno */
+.events-carousel .event-row > *{
+  width: min(520px, 100%);
+}
+
+/* remove scrollbars em todos os browsers */
+.events-carousel .events::-webkit-scrollbar{
+  display: none;
+}
+.events-carousel .events{
+  scrollbar-width: none;
+}
