@@ -449,6 +449,80 @@ body.menu-open .mobile-menu{ display:block; }
 /* =========================
    CALENDÁRIO – FIX DEFINITIVO
 ========================= */
+/* =========================
+   Carousel arrows — clean Apple
+========================= */
+
+.events-carousel{
+  padding: 12px 72px;
+}
+
+/* botão */
+.carousel-btn{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.92);
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.10),
+    0 1px 0 rgba(0,0,0,.04);
+
+  color: rgba(11,18,32,.65);
+  font-size: 24px;
+  font-weight: 600;
+
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    background .15s ease,
+    color .15s ease;
+}
+
+/* hover */
+.carousel-btn:hover{
+  background: #ffffff;
+  color: rgba(11,18,32,.85);
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.14),
+    0 2px 0 rgba(0,0,0,.05);
+  transform: translateY(-1px);
+}
+
+/* active (click) */
+.carousel-btn:active{
+  transform: translateY(0);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.10);
+}
+
+/* foco acessível */
+.carousel-btn:focus-visible{
+  outline: 3px solid rgba(29,107,255,.28);
+  outline-offset: 3px;
+}
+
+/* posicionamento */
+.carousel-btn.prev{ left: 14px; }
+.carousel-btn.next{ right: 14px; }
+
+/* mobile */
+@media (max-width: 520px){
+  .events-carousel{
+    padding: 12px 56px;
+  }
+
+  .carousel-btn{
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+}
 
 /* trilho horizontal real */
 .events-horizontal{
