@@ -555,3 +555,21 @@ body.menu-open .mobile-menu{ display:block; }
 .events-carousel .event-name{
   margin: 0;
 }
+
+/* Antes do JS iniciar, não aplica transform (mostra o 1º slide) */
+.events-carousel:not([data-carousel-init="1"]) .events{
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Quando o JS marcar como iniciado, aí sim anima */
+.events-carousel[data-carousel-init="1"] .events{
+  transition: transform .6s ease;
+}
+
+/* Card clicável (link) sem ficar com cara de link */
+.events-carousel .event-card{
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
