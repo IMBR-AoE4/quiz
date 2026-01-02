@@ -473,11 +473,19 @@ body.menu-open .mobile-menu{ display:block; }
 }
 
 /* CARD interno (limita largura sem quebrar o slide) */
-.events-carousel .event-row > *{
-  max-width: min(640px, 100%);
-  width: 100%;
-  margin: 0 auto;
+.events-carousel .event-row{
+  align-items: center;
+}
 
+.events-carousel .event-row > *{
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.events-carousel .event-row{
+  max-width: min(640px, 100%);
+  margin: 0 auto;
   padding: 14px;
   border: 1px solid rgba(11,18,32,.10);
   border-radius: var(--radius);
