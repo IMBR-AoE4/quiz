@@ -444,46 +444,69 @@ body.menu-open .mobile-menu{ display:block; }
 }
 .footer .dot{ opacity:.6; }
 
-/* =========================
-   CALENDÁRIO — CAROUSEL FINAL (sem bug)
-========================= */
-
 .events-carousel{
   position: relative;
   width: 100%;
   overflow: hidden;
 }
 
-/* trilho */
+/* trilho ok */
 .events-carousel .events{
-  display: flex;
-  width: 100%;
-  will-change: transform;
+  display: flex !important;
 }
 
-/* SLIDE = 100% do viewport */
+/* SLIDE sempre 100% */
 .events-carousel .event-row{
-  flex: 0 0 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+
+  display: flex !important;
+  grid-template-columns: unset !important;
+  gap: 0 !important;
+
+  justify-content: center !important;
+  align-items: center !important;
+
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
 }
 
-/* CARD interno (aqui sim limita) */
-.events-carousel .event-row .event-card{
-  width: min(560px, 100%);
+/* CARD interno (limita largura sem quebrar o slide) */
+.events-carousel .event-row > *{
+  max-width: min(640px, 100%);
+  width: 100%;
+  margin: 0 auto;
+
   padding: 14px;
   border: 1px solid rgba(11,18,32,.10);
   border-radius: var(--radius);
   background: rgba(255,255,255,.78);
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
-/* logo */
-.events-carousel .event-row .event-logo{
+/* LOGO: limita tamanho para não “explodir” */
+.events-carousel .event-logo{
+  width: 100%;
   border-radius: 14px;
   overflow: hidden;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.70);
 }
 
+/* IMAGEM: limite de altura + mantém proporção */
+.events-carousel .event-logo img{
+  width: 100%;
+  height: auto;
+  max-height: 300px;       /* ajuste: 260–360 se quiser */
+  object-fit: contain;     /* não corta, só encaixa */
+  display: block;
+}
+
+/* texto do card */
+.events-carousel .event-name{
+  margin: 0;
+}
