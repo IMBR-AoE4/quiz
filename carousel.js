@@ -18,8 +18,8 @@ window.addEventListener("DOMContentLoaded", () => {
   let slideWidth = 0;
 
   function measure() {
-    slideWidth = viewport.getBoundingClientRect().width;
-  }
+  slideWidth = viewport.clientWidth;
+}
 
   function goTo(i, animate = true) {
     measure();
