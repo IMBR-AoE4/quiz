@@ -611,3 +611,39 @@ body.menu-open .mobile-menu{ display:block; }
     width: 280px;
   }
 }
+
+/* =========================
+   Altura fixa dos cards
+========================= */
+
+.event-row{
+  display: flex;
+  flex-direction: column;
+  height: 420px; /* ajuste fino aqui se quiser */
+}
+
+/* área da imagem */
+.event-row .event-image{
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* imagem não estoura */
+.event-row .event-image img{
+  max-height: 120px;
+  width: auto;
+}
+
+/* conteúdo do card ocupa o restante */
+.event-row .event-content{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* descrição cresce, tags ficam sempre no rodapé */
+.event-row .event-content p{
+  flex: 1;
+}
