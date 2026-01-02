@@ -142,9 +142,12 @@
       </p>
     </header>
 
-    <div class="events-carousel">
-      <div class="events events-horizontal">
+    <div class="events-carousel" aria-label="Carrossel de eventos">
+      <button class="carousel-btn prev" type="button" aria-label="Evento anterior" data-carousel-prev>
+        ‹
+      </button>
 
+      <div class="events events-horizontal" data-carousel-track>
         <article class="event-row">
           <a class="event-card" href="./eventos/conquistador-do-brasil.html" aria-label="Ver detalhes: Conquistador do Brasil">
             <div class="event-logo">
@@ -239,11 +242,15 @@
             </div>
           </a>
         </article>
-
       </div>
+
+      <button class="carousel-btn next" type="button" aria-label="Próximo evento" data-carousel-next>
+        ›
+      </button>
     </div>
   </div>
 </section>
+
 
 <!-- =========================
      4) ORGANIZAÇÃO
