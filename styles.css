@@ -444,6 +444,8 @@ body.menu-open .mobile-menu{ display:block; }
 }
 .footer .dot{ opacity:.6; }
 
+
+
 .events-carousel{
   position: relative;
   width: 100%;
@@ -453,6 +455,39 @@ body.menu-open .mobile-menu{ display:block; }
 /* trilho ok */
 .events-carousel .events{
   display: flex !important;
+}
+/* visual mais “compacto”, parecido com o antigo */
+.events-carousel .event-card{
+  width: min(420px, 100%);
+  padding: 14px;
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.78);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* logo mais contido */
+.events-carousel .event-logo img{
+  max-height: 240px;
+}
+
+/* texto mais alinhado e leve */
+.events-carousel .event-name{
+  font-size: 18px;
+  margin: 0;
+}
+
+.events-carousel .event-desc{
+  margin: 0;
+  line-height: 1.5;
+}
+
+.events-carousel .event-tags{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* SLIDE sempre 100% */
@@ -471,6 +506,8 @@ body.menu-open .mobile-menu{ display:block; }
   background: transparent !important;
   padding: 0 !important;
 }
+
+
 
 /* CARD interno (limita largura sem quebrar o slide) */
 .events-carousel .event-row{
