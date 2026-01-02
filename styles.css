@@ -23,7 +23,6 @@ body{
   padding-top: 68px; /* espaço do header fixo */
 }
 
-/* evita “ancorar” por baixo do header fixo */
 section{ scroll-margin-top: 84px; }
 
 a{ color:inherit; text-decoration:none; }
@@ -124,7 +123,7 @@ img{ max-width:100%; display:block; }
 }
 body.menu-open .mobile-menu{ display:block; }
 
-/* regras anti-duplicação (cruciais) */
+/* regras anti-duplicação */
 @media (max-width: 920px){
   .nav{ display:none; }
   .nav-toggle{ display:block; }
@@ -171,7 +170,7 @@ body.menu-open .mobile-menu{ display:block; }
     linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.70));
 }
 
-/* overlay padrão claro (outras seções) */
+/* overlay padrão claro */
 .overlay-soft{
   background:
     linear-gradient(to bottom,
@@ -187,7 +186,6 @@ body.menu-open .mobile-menu{ display:block; }
 
 /* =========================
    BACKGROUNDS (IMAGENS)
-   (ajuste os nomes aqui se necessário)
 ========================= */
 .bg-hero::before{
   background-image: url("./assets/bg1.png");
@@ -200,8 +198,39 @@ body.menu-open .mobile-menu{ display:block; }
 }
 
 /* =========================
+   MELHOR LEGIBILIDADE NAS SEÇÕES COM IMAGEM
+   (zona de leitura à esquerda)
+========================= */
+.bg-calendar .overlay-soft{
+  background:
+    linear-gradient(
+      to right,
+      rgba(255,255,255,.90) 0%,
+      rgba(255,255,255,.78) 48%,
+      rgba(255,255,255,.35) 72%,
+      rgba(255,255,255,.12) 100%
+    );
+}
+
+.bg-sponsors .overlay-soft{
+  background:
+    linear-gradient(
+      to right,
+      rgba(255,255,255,.92) 0%,
+      rgba(255,255,255,.80) 48%,
+      rgba(255,255,255,.38) 72%,
+      rgba(255,255,255,.14) 100%
+    );
+}
+
+/* deixa essas seções mais “wide” (menos delimitado) */
+.bg-calendar .wrap,
+.bg-sponsors .wrap{
+  width: min(1280px, calc(100% - 44px));
+}
+
+/* =========================
    SEÇÕES SÓLIDAS (SEM IMAGEM)
-   (usa na section, não no ::before)
 ========================= */
 .bg-solid-1{
   background:
@@ -260,7 +289,6 @@ body.menu-open .mobile-menu{ display:block; }
   color: rgba(255,255,255,.96);
 }
 
-/* mini row (se existir no seu HTML) */
 .hero-mini{
   display:flex;
   flex-wrap:wrap;
@@ -274,7 +302,7 @@ body.menu-open .mobile-menu{ display:block; }
 .hero-mini .dot{ opacity:.6; }
 
 /* =========================
-   BOTÕES (hero)
+   BOTÕES
 ========================= */
 .hero-actions{
   display:flex;
@@ -309,7 +337,7 @@ body.menu-open .mobile-menu{ display:block; }
 }
 
 /* =========================
-   CONTENT (sem cards)
+   CONTENT (sem cards pesados)
 ========================= */
 .section-head{ margin-bottom: 16px; }
 
@@ -322,7 +350,7 @@ body.menu-open .mobile-menu{ display:block; }
 
 .lead{
   margin:0;
-  color: rgba(11,18,32,.70);
+  color: rgba(11,18,32,.72);
   line-height: 1.55;
   max-width: 920px;
   text-shadow: 0 2px 16px rgba(0,0,0,.06);
@@ -336,7 +364,7 @@ body.menu-open .mobile-menu{ display:block; }
 
 .text{
   margin: 0 0 12px 0;
-  color: rgba(11,18,32,.82);
+  color: rgba(11,18,32,.84);
   line-height: 1.75;
   font-size: 16px;
   text-shadow: 0 2px 16px rgba(0,0,0,.05);
@@ -354,8 +382,8 @@ body.menu-open .mobile-menu{ display:block; }
   padding: 7px 10px;
   border-radius: 999px;
   border: 1px solid rgba(11,18,32,.12);
-  background: rgba(255,255,255,.70);
-  color: rgba(11,18,32,.75);
+  background: rgba(255,255,255,.78);
+  color: rgba(11,18,32,.78);
   font-weight: 900;
   font-size: 12px;
 }
@@ -369,6 +397,7 @@ body.menu-open .mobile-menu{ display:block; }
   gap: 12px;
 }
 
+/* modo horizontal (swipe no mobile) */
 .events-horizontal{
   display: grid;
   grid-auto-flow: column;
@@ -381,9 +410,18 @@ body.menu-open .mobile-menu{ display:block; }
   -webkit-overflow-scrolling: touch;
 }
 
+/* esconde o scroll horizontal no desktop */
+@media (min-width: 1024px){
+  .events-horizontal{
+    overflow-x: hidden;
+    padding-bottom: 0;
+  }
+}
+
+/* (opcional) scrollbar mais discreta quando existir */
 .events-horizontal::-webkit-scrollbar{ height: 10px; }
 .events-horizontal::-webkit-scrollbar-thumb{
-  background: rgba(29,107,255,.25);
+  background: rgba(29,107,255,.18);
   border-radius: 999px;
 }
 .events-horizontal::-webkit-scrollbar-track{
@@ -399,7 +437,7 @@ body.menu-open .mobile-menu{ display:block; }
 
   border: 1px solid rgba(11,18,32,.10);
   border-radius: var(--radius);
-  background: rgba(255,255,255,.68);
+  background: rgba(255,255,255,.78);
   padding: 14px;
 }
 
@@ -414,7 +452,7 @@ body.menu-open .mobile-menu{ display:block; }
   border-radius: 14px;
   overflow:hidden;
   border: 1px solid rgba(11,18,32,.10);
-  background: rgba(255,255,255,.60);
+  background: rgba(255,255,255,.70);
 }
 
 .event-logo img{
@@ -447,8 +485,8 @@ body.menu-open .mobile-menu{ display:block; }
   padding: 7px 10px;
   border-radius: 999px;
   border: 1px solid rgba(11,18,32,.12);
-  background: rgba(255,255,255,.70);
-  color: rgba(11,18,32,.75);
+  background: rgba(255,255,255,.82);
+  color: rgba(11,18,32,.78);
 }
 
 @media (max-width: 980px){
@@ -476,14 +514,14 @@ body.menu-open .mobile-menu{ display:block; }
   padding: 16px;
   border-radius: var(--radius);
   border: 1px solid rgba(11,18,32,.10);
-  background: rgba(255,255,255,.70);
+  background: rgba(255,255,255,.78);
   transition: transform .12s ease, border-color .12s ease, background .12s ease;
 }
 
 .contact:hover{
   transform: translateY(-1px);
   border-color: rgba(29,107,255,.35);
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.94);
 }
 
 .contact-kicker{
